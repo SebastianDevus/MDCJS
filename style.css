@@ -20,13 +20,17 @@ h3 {
     gap: 50px;
 }
 
-select, label {
+input, label {
     display: block;
 }
 
-select {
+input, button {
     color: wheat;
     background-color: rgb(73, 71, 71);
+}
+
+button {
+    border: none;
 }
 
 button {
