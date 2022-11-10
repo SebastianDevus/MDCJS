@@ -18,9 +18,16 @@ campoNr2.addEventListener("change", event => {
 });
 
 botaoCalcula.addEventListener("click", event => {
-
+    console.log(calculaMDC(numeros.nr1, numeros.nr2));
 });
 
-function calculaMDC(nr1, nr2) {
-    
+function calculaMDC(dividendo, divisor) {
+    do {
+        resto = dividendo % divisor;
+        dividendo = divisor;
+        divisor = resto;
+    } 
+    while (resto != 0);
+
+    return dividendo;
 }
