@@ -18,7 +18,9 @@ campoNr2.addEventListener("change", event => {
 });
 
 botaoCalcula.addEventListener("click", event => {
-    console.log(calculaMDC(numeros.nr1, numeros.nr2));
+    let valorMDC = calculaMDC(numeros.nr1, numeros.nr2);
+
+    campoDeExibicao.innerHTML = `O MDC de ${numeros.nr1} e ${numeros.nr2} é igual a ${valorMDC}`;
 });
 
 function calculaMDC(dividendo, divisor) {
