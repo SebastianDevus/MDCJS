@@ -1,35 +1,56 @@
-const campoNr1 = document.getElementById("inputNr1");
-const campoNr2 = document.getElementById("inputNr2");
-const campoDeExibicao = document.getElementById("exibeMDC");
-const botaoCalcula = document.getElementById("botaoCalcula");
-
-const numeros = {
+let numeros = {
     nr1: null,
     nr2: null
 }
 
-// Armazenando valores dos inputs nas propriedades do objeto "numeros"
-campoNr1.addEventListener("change", event => {
-    numeros.nr1 = Number(event.target.value);
-});
+// Adiciona variáveis para armazenar os elementos necessários
+let campoNr1 = null;
+let campoNr2 = null;
+let campoDeExibicao = null;
+let botaoCalcula = null;
 
-campoNr2.addEventListener("change", event => {
-    numeros.nr2 = Number(event.target.value);
-});
+// Executa setup quando o DOM carrega
+document.addEventListener("DOMContentLoaded", setup());
 
-botaoCalcula.addEventListener("click", event => {
-    let valorMDC = calculaMDC(numeros.nr1, numeros.nr2);
+function setup() {
+    // Busca e armazena elementos necessários
+    campoNr1 = document.getElementById("inputNr1");
+    campoNr2 = document.getElementById("inputNr2");
+    campoDeExibicao = document.getElementById("exibeMDC");
+    botaoCalcula = document.getElementById("botaoCalcula");
 
-    campoDeExibicao.innerHTML = `O MDC de ${numeros.nr1} e ${numeros.nr2} é igual a ${valorMDC}`;
-});
+    // Armazenando valores dos inputs nas propriedades do objeto "numeros"
+    campoNr1.addEventListener("change", () => numeros.nr1 = Number(campoNr1.value));
+    campoNr2.addEventListener("change", () => numeros.nr2 = Number(campoNr2.value));
+
+    // Ao clicar no botao, chama a função calculaMDC e exibe o resultado
+    botaoCalcula.addEventListener("click", () => {
+        let valorMDC = calculaMDC(numeros.nr1, numeros.nr2);
+
+        if (valorMDC == "DividiuPorZero") { 
+            // Mensagem de erro
+            campoDeExibicao.innerText = "Não é possível dividir por 0.";
+        }
+        else {
+            // Mensagem normal
+            campoDeExibicao.innerText = `O MDC de ${numeros.nr1} e ${numeros.nr2} é igual a ${valorMDC}.`;
+        }
+    });
+}
 
 function calculaMDC(dividendo, divisor) {
-    do {
-        resto = dividendo % divisor;
-        dividendo = divisor;
-        divisor = resto;
-    } 
-    while (resto != 0);
+    if (divisor == 0) {
+        // Caso o divisor for 0, não execute laço de divisão para evitar erros
+        return "DividiuPorZero";
+    }
+    else {
+        do {
+            resto = dividendo % divisor;
+            dividendo = divisor;
+            divisor = resto;
+        }
+        while (resto != 0);
 
-    return dividendo;
+        return dividendo;
+    }
 }
