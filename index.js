@@ -29,7 +29,7 @@ function setup() {
 
         if (valorMDC == "DividiuPorZero") { 
             // Mensagem de erro
-            campoDeExibicao.innerText = "Não é possível dividir por 0.";
+            campoDeExibicao.innerText = "Um erro ocorreu: \"Não é possível dividir por 0.\"";
         }
         else {
             // Mensagem normal
