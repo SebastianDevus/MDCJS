@@ -27,11 +27,7 @@ function setup() {
     botaoCalcula.addEventListener("click", () => {
         let valorMDC = calculaMDC(numeros.nr1, numeros.nr2);
 
-        if (valorMDC == "DividiuPorZero") { 
-            // Mensagem de erro
-            campoDeExibicao.innerText = "Um erro ocorreu: \"Não é possível dividir por 0.\"";
-        }
-        else {
+        if (valorMDC != "DividiuPorZero") { 
             // Mensagem normal
             campoDeExibicao.innerText = `O MDC de ${numeros.nr1} e ${numeros.nr2} é igual a ${valorMDC}.`;
         }
@@ -39,8 +35,8 @@ function setup() {
 }
 
 function calculaMDC(dividendo, divisor) {
-    if (divisor == 0) {
-        // Caso o divisor for 0, não execute laço de divisão para evitar erros
+    // Caso o divisor ou o dividendo forem falsos || 0 || nulos, não execute laço de divisão para evitar erros
+    if (!divisor || !dividendo) {
         return "DividiuPorZero";
     }
     else {
